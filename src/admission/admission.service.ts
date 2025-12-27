@@ -22,4 +22,13 @@ export class AdmissionService {
   async addReview(admissionId: string, review: string, rating: number) {
     return this.admissionModel.findByIdAndUpdate(admissionId, { review, rating }, { new: true });
   }
+
+    // Get latest 3 reviews
+  async getReviews() {
+    return this.admissionModel
+      .find({ review: { $exists: true, $ne: '' } }) 
+      .populate('userId', 'name image') 
+      .populate('collegeId', 'name')  
+      .exec();
+  }
 }

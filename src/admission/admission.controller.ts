@@ -28,4 +28,9 @@ export class AdmissionController {
   addReview(@Body() body: AddReviewDto) {
     return this.admissionService.addReview(body.admissionId, body.review, body.rating);
   }
+
+  @Get('reviews')
+  async getReviews() {
+    return this.admissionService.getReviews();
+  }
 }
